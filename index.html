@@ -53,7 +53,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc2QbgzyDHfOijIx4j8wWInPNk6ErXeBWeVl6V-9ffu0XnKxQ/viewform?usp=pp_url" class="get-started-btn scrollto">Commencer</a>
+      <a style="cursor: pointer;" class="get-started-btn scrollto" id="myidpayer">Payer</a>
     </div>
   </header><!-- End Header -->
 
@@ -980,7 +980,22 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script>
+    //funcion to pay for kkiapay
+    var MyClasidpayer = document.getElementById('myidpayer');
 
+    MyClasidpayer.addEventListener('click', function () {
+   
+        openKkiapayWidget({
+                amount: `80000`,
+                position: "center",
+                callback: "javascript:sendmycommandinCentremodale()",
+                data: "",
+                theme: "blue",
+                key: "deb48fc468f8e7fcc35aee7ae721254a3427f5e5",
+              });
+    })
+</script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
@@ -989,7 +1004,7 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
-
+  <script src="https://cdn.kkiapay.me/k.js"></script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
