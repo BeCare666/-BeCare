@@ -1251,6 +1251,15 @@ section {
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .team .member .member-img img{
+    width: 67vh;
+  }
+  #imgcontact{
+    max-width: 100%;
+    height: auto;
+  }
+}
 .team .member .social {
   position: absolute;
   left: 0;
