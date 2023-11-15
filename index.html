@@ -15,7 +15,7 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -53,10 +53,33 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a style="cursor: pointer;" class="get-started-btn scrollto" id="myidpayer">Payer</a>
+      <a style="cursor: pointer; color: white !important;" class="get-started-btn scrollto" id="myidpayer" data-toggle="modal" data-target="#exampleModal">Payer</a>
     </div>
   </header><!-- End Header -->
-
+  <div style="background-color: #FFB6C1 !important;" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Demande de site web</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Metter le prix</label>
+              <input type="text" class="form-control" id="recipient-name" oninput="validerSaisie(this)">
+            </div>
+           
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-primary" id="sendunityforuser"  data-dismiss="modal">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
@@ -416,7 +439,7 @@
                 <p>illicolove.com</p>
                 <div class="portfolio-links">
                  <!---<a href="assets/img/portfolio/illi1.png" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>---> 
-                  <a href="https://illicolove.com/" title="More Details"> <button class="btn btn-danger">Visitez le site</button></a>
+                  <a href="https://illicolove.netlify.app" title="More Details"> <button class="btn btn-danger">Visitez le site</button></a>
                 </div>
               </div>
             </div>
@@ -981,19 +1004,33 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <script>
-    //funcion to pay for kkiapay
-    var MyClasidpayer = document.getElementById('myidpayer');
+    function validerSaisie(input) {
+    const valeurSaisie = input.value;
+    const regexLettresAvecEspaces = /^\d+$/;
 
-    MyClasidpayer.addEventListener('click', function () {
-   
+    if (!regexLettresAvecEspaces.test(valeurSaisie)) {
+      //alert("ne fait pas ça")
+      // Effacez la saisie incorrecte
+      input.value = input.value.replace(/\D/g, '');
+     
+    } else {
+    }
+  }
+    //funcion to pay for kkiapay
+    var MyClasidpayer = document.getElementById('sendunityforuser');
+    var PRICE = document.getElementById('recipient-name');
+    MyClasidpayer.addEventListener('click', function () {    
+       if(PRICE.value === ""){
+       }else{
         openKkiapayWidget({
-                amount: `55000`,
-                position: "center",
-                callback: "javascript:sendmycommandinCentremodale()",
-                data: "",
-                theme: "blue",
-                key: "deb48fc468f8e7fcc35aee7ae721254a3427f5e5",
-              });
+        amount: `${PRICE.value}`,
+        position: "center",
+        callback: "javascript:sendmycommandinCentremodale()",
+        data: "",
+        theme: "blue",
+        key: "deb48fc468f8e7fcc35aee7ae721254a3427f5e5", 
+        });
+       }
     })
 </script>
   <!-- Vendor JS Files -->
@@ -1004,6 +1041,9 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://cdn.kkiapay.me/k.js"></script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
