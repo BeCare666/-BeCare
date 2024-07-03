@@ -24,7 +24,8 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
@@ -60,7 +61,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content" style="background-color: rgb(47, 45, 104) !important">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="color: white !important;">Demande de site web</h5>
+          <h5 class="modal-title" id="exampleModalLabel" style="color: white !important;">Commande de site web</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -70,6 +71,14 @@
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"  style="color: white !important;">Metter le prix</label>
               <input type="text" class="form-control" id="recipient-name" oninput="validerSaisie(this)">
+              <label for="nom_du_site" class="col-form-label"  style="color: white !important;">Le nom du site ou de l'application</label>
+              <input type="text" class="form-control" id="nom_du_site">
+              <label for="nom_du_site" class="col-form-label"  style="color: white !important;">Le type du site</label>
+              <select type="text" class="form-control" id="type_du_site">
+                <option value="Web">Web</option>
+                <option value="Web">Web et mobile</option>
+                <option value="Web">Mobile</option>
+              </select>
             </div>
            
         </div>
@@ -1059,14 +1068,24 @@
     //funcion to pay for kkiapay
     var MyClasidpayer = document.getElementById('sendunityforuser');
     var PRICE = document.getElementById('recipient-name');
-    MyClasidpayer.addEventListener('click', function () {    
-       if(PRICE.value === ""){
+    var nom_du_site = document.getElementById('nom_du_site');
+    var type_du_site = document.getElementById('type_du_site');
+    MyClasidpayer.addEventListener('click', function () {  
+      var textdata = `J'ai effectué ce paiement dans le cadre de la mise en place de mon application ${type_du_site.value} ${nom_du_site.value} . `  
+       if(PRICE.value === "" || nom_du_site.value === "" || type_du_site.value === ""){
+        Swal.fire({
+                title: "Désolé",
+                text: "L'un des champs es vide",
+                icon: "info",
+                closeOnClickOutside: false,
+                });
        }else{
+        console.log(textdata)
         openKkiapayWidget({
                 amount: `${PRICE.value}`,
                 position: "center",
                 callback: "javascript:sendmycommandinCentremodale()",
-                data: "",
+                data: `${textdata}`,
                 theme: "blue",
                 key: "deb48fc468f8e7fcc35aee7ae721254a3427f5e5",
               });
